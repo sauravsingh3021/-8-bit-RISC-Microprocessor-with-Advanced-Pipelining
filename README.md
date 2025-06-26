@@ -58,3 +58,40 @@ Supported Opcodes
 | 1110   | STORE     | Store to data memory  |
 | 1111   | SHL       | Shift left            |
 
+Performance Metrics
+---
+During simulation, the following metrics are tracked and printed:
+
+Total Cycles
+
+Instructions Retired
+
+IPC (Instructions Per Cycle)
+
+CPI (Cycles Per Instruction)
+
+Total Stalls
+
+Simulation Output Example
+---
+Time: 50 | PC: 3
+Registers: R0=10 | R1=7 | R2=15 | R3=1
+------------------------------------------------
+======== Performance Metrics ========
+Total Cycles        : 50
+Instructions Retired: 10
+IPC (Instr/Cycle)   : 0.20
+CPI (Cycle/Instr)   : 5.00
+Total Stalls        : 5
+
+Tools & Technologies
+---
+Language: Verilog
+
+Simulation Tools: Siemens Questa, Synopsys VCS, Vivado
+
+Target Platform: FPGA (e.g., Nexys 4 DDR)
+
+Concepts: Microprocessor Design, Instruction Pipelining, Hazard Handling, Performance Optimization
+
+
