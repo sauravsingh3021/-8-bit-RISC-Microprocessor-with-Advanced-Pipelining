@@ -33,64 +33,28 @@ The processor operates in the following pipeline stages:
 - Testbench to simulate and monitor processor behavior.
 
 Instruction Format
+---
 Each 8-bit instruction is formatted as:
-
-less
-Copy
-Edit
 [7:4] Opcode | [3:2] Destination Register | [1:0] Source Register
+
 Supported Opcodes
-Opcode	Operation	Description
-0000	ADD	Add two registers
-0001	SUB	Subtract
-0010	MUL	Multiply
-0011	DIV	Divide
-0100	MOD	Modulus
-0101	AND	Bitwise AND
-0110	OR	Bitwise OR
-0111	XOR	Bitwise XOR
-1000	NOT	Bitwise NOT (unary)
-1001	EQ	Equality check
-1010	INC	Increment
-1011	DEC	Decrement
-1100	POW	Exponentiation
-1101	JUMP	Branch/Jump to target
-1110	STORE	Store to data memory
-1111	SHL	Shift left
-
-Performance Metrics
-During simulation, the following metrics are tracked and printed:
-
-Total Cycles
-
-Instructions Retired
-
-IPC (Instructions Per Cycle)
-
-CPI (Cycles Per Instruction)
-
-Total Stalls
-
-Simulation Output Example
-yaml
-Copy
-Edit
-Time: 50 | PC: 3
-Registers: R0=10 | R1=7 | R2=15 | R3=1
-------------------------------------------------
-...
-======== Performance Metrics ========
-Total Cycles        : 50
-Instructions Retired: 10
-IPC (Instr/Cycle)   : 0.20
-CPI (Cycle/Instr)   : 5.00
-Total Stalls        : 5
-Tools & Technologies
-Language: Verilog
-
-Simulation Tool: ModelSim / Icarus Verilog / Vivado
-
-Target Platform: FPGA (e.g., Nexys 4 DDR)
-
-Concepts: Microprocessor Design, Instruction Pipelining, Hazard Handling, Performance Optimization
+---
+| Opcode | Operation | Description           |
+| ------ | --------- | --------------------- |
+| 0000   | ADD       | Add two registers     |
+| 0001   | SUB       | Subtract              |
+| 0010   | MUL       | Multiply              |
+| 0011   | DIV       | Divide                |
+| 0100   | MOD       | Modulus               |
+| 0101   | AND       | Bitwise AND           |
+| 0110   | OR        | Bitwise OR            |
+| 0111   | XOR       | Bitwise XOR           |
+| 1000   | NOT       | Bitwise NOT (unary)   |
+| 1001   | EQ        | Equality check        |
+| 1010   | INC       | Increment             |
+| 1011   | DEC       | Decrement             |
+| 1100   | POW       | Exponentiation        |
+| 1101   | JUMP      | Branch/Jump to target |
+| 1110   | STORE     | Store to data memory  |
+| 1111   | SHL       | Shift left            |
 
