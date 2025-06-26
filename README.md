@@ -76,7 +76,6 @@ Simulation Output Example
 ---
 Time: 50 | PC: 3
 Registers: R0=10 | R1=7 | R2=15 | R3=1
-------------------------------------------------
 ======== Performance Metrics ========
 Total Cycles        : 50
 Instructions Retired: 10
