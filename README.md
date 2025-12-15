@@ -1,98 +1,105 @@
-# 8-bit RISC Microprocessor with Advanced Pipelining
----
-- Designed and implemented an 8-bit RISC processor with a custom 16-instruction set architecture to enhance performance.  
-- Developed a 5-stage pipeline (Fetch, Decode, Execute, Memory, Writeback) for efficient parallel processing and reduced cycle time.  
-- Implemented hazard detection and mitigation techniques, including data forwarding, stalling, and branch prediction, to resolve data and control hazards.  
-- Optimized processor performance by minimizing instruction cycle time and improving throughput.  
-- Exposure to Verilog, Xilinx Vivado, FPGA (Nexys 4 DDR), Microprocessor Design, Instruction Pipelining, and Hazard Handling.  
-
+# 8-bit RISC Processor with 5-Stage Pipelining
 
 ## Overview
+This project implements an **8-bit pipelined RISC processor** using **Verilog HDL**, designed to demonstrate core concepts of **computer architecture, pipelining, and hazard management**. The processor supports a **custom 16-instruction ISA** and is verified through simulation using a comprehensive testbench.
 
-This project implements an **8-bit RISC microprocessor** with a custom 16-instruction set architecture (ISA) using Verilog. The processor features a **5-stage pipeline** architecture designed to improve instruction throughput and minimize execution latency. It also includes advanced hazard handling techniques such as **data forwarding**, **stalling**, and **branch control** to mitigate data and control hazards efficiently.
+---
+
+## Features
+- **5-Stage Pipeline Architecture**
+  - Instruction Fetch (IF)
+  - Instruction Decode (ID)
+  - Execute (EX)
+  - Memory Access (MEM)
+  - Write Back (WB)
+
+- **Custom 8-bit ISA (16 Instructions)**
+  - Arithmetic & Logic: ADD, SUB, AND, OR, XOR, ADDI, SLT, SLL
+  - Memory Operations: LOAD, STORE, LOADB, STOREB
+  - Control Flow: BEQ, BNE, JUMP
+  - NOP
+
+- **Hazard Handling**
+  - Data hazard resolution using **EX/MEM and MEM/WB forwarding**
+  - **Load-use hazard detection** with pipeline stalling
+  - **Control hazard handling** via branch detection and pipeline flushing
+
+- **Performance Measurement**
+  - Cycle count
+  - Instruction count
+  - IPC (Instructions Per Cycle)
+  - Stall count
+
+- **Verification**
+  - Directed testbench executing all ISA instructions
+  - Waveform generation (VCD) for debugging
+  - Watchdog timer to prevent deadlock during simulation
+
+---
+
+## Architecture Overview
+- 8-bit Program Counter
+- 4-entry general-purpose register file
+- Instruction and data memory (256 bytes each)
+- Fully synchronous pipeline registers between stages
+- PC-relative branching and jumping
+
+---
 
 ## Pipeline Stages
 
-The processor operates in the following pipeline stages:
+| Stage | Description |
+|-----|------------|
+| IF  | Fetch instruction and update PC |
+| ID  | Decode instruction and read registers |
+| EX  | Perform ALU operations and branch evaluation |
+| MEM | Access data memory for load/store |
+| WB  | Write results back to register file |
 
-1. **Instruction Fetch (IF):** Fetches the instruction from instruction memory.
-2. **Instruction Decode (ID):** Decodes the instruction and reads operands from the register bank.
-3. **Execution (EX):** Performs arithmetic and logical operations using an ALU.
-4. **Memory (MEM):** Handles memory access operations (load/store).
-5. **Write Back (WB):** Writes results back to the register file.
-
-## Features
-
-- Custom 16-instruction set (e.g., add, sub, mul, div, and, or, xor, load, store, branch).
-- 5-stage pipelined architecture for efficient instruction execution.
-- 4 general-purpose 8-bit registers.
-- 16-byte instruction and data memory.
-- Data forwarding to reduce pipeline stalls.
-- Basic branch control and flushing on branch taken.
-- Performance metrics tracking: IPC, CPI, cycle count, stall count.
-- Testbench to simulate and monitor processor behavior.
-
-Instruction Format
 ---
-Each 8-bit instruction is formatted as:
-[7:4] Opcode | [3:2] Destination Register | [1:0] Source Register
 
-Supported Opcodes
+## Hazard Management
+- **Data Hazards:** Resolved using forwarding paths from EX/MEM and MEM/WB stages
+- **Load-Use Hazards:** Detected in decode stage and handled with pipeline stall
+- **Control Hazards:** Branch decisions made in EX stage with pipeline flush on taken branch
+
 ---
-| Opcode | Operation | Description           |
-| ------ | --------- | --------------------- |
-| 0000   | ADD       | Add two registers     |
-| 0001   | SUB       | Subtract              |
-| 0010   | MUL       | Multiply              |
-| 0011   | DIV       | Divide                |
-| 0100   | MOD       | Modulus               |
-| 0101   | AND       | Bitwise AND           |
-| 0110   | OR        | Bitwise OR            |
-| 0111   | XOR       | Bitwise XOR           |
-| 1000   | NOT       | Bitwise NOT (unary)   |
-| 1001   | EQ        | Equality check        |
-| 1010   | INC       | Increment             |
-| 1011   | DEC       | Decrement             |
-| 1100   | POW       | Exponentiation        |
-| 1101   | JUMP      | Branch/Jump to target |
-| 1110   | STORE     | Store to data memory  |
-| 1111   | SHL       | Shift left            |
 
-Performance Metrics
+## Simulation & Testing
+- Simulated using **EDA Playground**
+- Includes waveform dumping (`dump.vcd`)
+- Testbench tracks:
+  - Total cycles
+  - Instructions executed
+  - IPC
+  - Number of stalls
+
 ---
-During simulation, the following metrics are tracked and printed:
 
-Total Cycles
+## How to Run
+1. Load `RISC8_Pipelined.v` and `tb_RISC8.v` into your Verilog simulator
+2. Run simulation
+3. View waveforms using a VCD viewer (GTKWave)
+4. Observe console output for performance metrics
 
-Instructions Retired
-
-IPC (Instructions Per Cycle)
-
-CPI (Cycles Per Instruction)
-
-Total Stalls
-
-Simulation Output Example
 ---
-Time: 50 | PC: 3
-Registers: R0=10 | R1=7 | R2=15 | R3=1
 
-======== Performance Metrics ========  
-Total Cycles        : 50  
-Instructions Retired: 10  
-IPC (Instr/Cycle)   : 0.20  
-CPI (Cycle/Instr)   : 5.00  
-Total Stalls        : 5  
+## Technologies Used
+- Verilog HDL
+- RTL Design
+- Computer Architecture
+- Digital Design Verification
+- EDA Playground
 
-
-Tools & Technologies
 ---
-Language: Verilog
 
-Simulation Tools: Siemens Questa, Synopsys VCS, Vivado
+## Future Improvements
+- True byte-level LOADB/STOREB implementation
+- Branch prediction (static or dynamic)
+- Pipeline bypass optimization
+- Parameterized data width and register file size
 
-Target Platform: FPGA (e.g., Nexys 4 DDR)
+---
 
-Concepts: Microprocessor Design, Instruction Pipelining, Hazard Handling, Performance Optimization
-
-
+## Author
+[Saurav Singh]
